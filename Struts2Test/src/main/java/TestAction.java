@@ -1,5 +1,6 @@
+import com.opensymphony.xwork2.Action;
 
-public class TestAction {
+public class TestAction implements Action{
 	
 	String message;
 	String firstName;
@@ -8,7 +9,7 @@ public class TestAction {
 		System.out.println("execute() method call");
 		message = "SUCCESS message";
 		System.out.println("Name: " + firstName);
-		return "success";
+		return SUCCESS;
 	}
 
 	public String getMessage() {

@@ -26,5 +26,21 @@
 <s:label value="Email: "/>
 <s:property value="email"/><br/>
 
+<s:label value="Address: "/>
+<s:property value="address"/><br/>
+
+<s:label value="Favourite color: "/>
+<s:property value="selectedColor"/><br/>
+
+<s:label value="Hobbies: "/>
+<s:property value="selectedHobbies"/><br/>
+
+<s:if test="%{subscription == true}">
+	<div>You are a subscriber</div>
+</s:if>
+<s:else>
+	<div>You are NOT a subscriber</div>
+</s:else>
+
 </body>
 </html>
