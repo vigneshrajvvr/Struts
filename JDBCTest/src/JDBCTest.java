@@ -25,6 +25,8 @@ class JDBCTest {
 				System.out.println(rs.getInt("ID") + " ----> " + rs.getString("NAME"));
 			}
 			
+			con.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
