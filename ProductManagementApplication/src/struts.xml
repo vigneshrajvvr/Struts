@@ -3,11 +3,26 @@
 Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">  
 
 <struts>  
-	<package name="productManagementApp" extends="struts-default">  
+	<package name="productManagementApp" extends="struts-default"> 
+		
+		<interceptors>
+			<interceptor name="loginInterceptor" class="interceptor.LoginInterceptor"/>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+	 	<default-interceptor-ref name="loginStack"/>
+	 	
 		<action name="loginAction" class="action.LoginAction">  
-			<result name="success" type="redirect">welcomeAction</result>
 			<result name="input">/login.jsp</result>
 		</action> 
+		
+		<action name="logoutAction" class="action.LogoutAction">  
+			<result name="success" type="redirect">welcomeAction</result>
+			<result name="input">/login.jsp</result>
+		</action>
 		
 		<action name="welcomeAction" class="action.WelcomeAction">  
 			<result name="success">/welcome.jsp</result>

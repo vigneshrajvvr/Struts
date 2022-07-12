@@ -48,6 +48,12 @@
 		<field-validator type="email">
 			<message key="error.email.valid"/>
 		</field-validator>
+		
+		<field-validator type="domainNameValidator">
+			<param name="domainName">gmail.com</param>
+			<message key="error.email.validdomain"/>
+		</field-validator>
+		
 	</field>
 	
 
