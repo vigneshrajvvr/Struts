@@ -13,17 +13,52 @@ import pojo.Product;
 
 public class ProductManagementDAO {
 	
-	public static List<Product> getAllProducts() {
+	public static List<Product> getAllProducts(String productName, String productCategory, String createdDate) {
 		
 		List<Product> productList = new ArrayList<>();
+		String whereClause = "";
+		if((productName == null || productName.equals(""))
+				&& (productCategory == null || productCategory.equals(""))
+				&& (createdDate == null || createdDate.equals(""))) {
+			whereClause = "";
+		} else  {
+			whereClause = " WHERE ";
+		}
+		int count = 0;
+		if(productName != null && !productName.equals("")) {
+			count++;
+			if(count != 1) {
+				whereClause += " AND ";
+			}
+			
+			whereClause += "prod_name = " + "'" + productName + "'";
+		}
+		
+		if(productCategory != null && !productCategory.equals("")) {
+			count++;
+			if(count != 1) {
+				whereClause += " AND ";
+			}
+			
+			whereClause += "prod_category = " + "'" + productCategory + "'";
+		}
+		
+		if(createdDate != null && !createdDate.equals("")) {
+			count++;
+			if(count != 1) {
+				whereClause += " AND ";
+			}
+			
+			whereClause += "created_date = " + "'" + createdDate + "'";
+		}
 		
 		try {
 			Connection conn = DBUtil.getConnection();
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from product");
+			ResultSet rs = st.executeQuery("select * from product" + whereClause);
 			
 			while(rs.next()) {
-				Product product = new Product(rs.getString("prod_id"), rs.getString("prod_name"), rs.getString("prod_category"), rs.getInt("prod_price"));
+				Product product = new Product(rs.getString("prod_id"), rs.getString("prod_name"), rs.getString("prod_category"), rs.getInt("prod_price"), rs.getString("created_date"));
 				productList.add(product);
 			}
 			
@@ -42,11 +77,12 @@ public class ProductManagementDAO {
 		
 		try {
 			Connection con = DBUtil.getConnection();
-			PreparedStatement ps = con.prepareStatement("insert into product values (?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into product values (?,?,?,?,?)");
 			ps.setString(1, product.getProductId());
 			ps.setString(2, product.getProductName());
 			ps.setString(3, product.getProductCategory());
 			ps.setInt(4, product.getProductPrice());
+			ps.setString(5, product.getCreatedDate());
 			status = ps.executeUpdate();
 			
 		} catch(Exception ex) {
@@ -70,7 +106,8 @@ public class ProductManagementDAO {
 				product = new Product(rs.getString("prod_id"),
 									  rs.getString("prod_name"),
 									  rs.getString("prod_category"),
-									  rs.getInt("prod_price"));
+									  rs.getInt("prod_price"),
+									  rs.getString("created_date"));
 			}
 			
 		} catch(Exception ex) {

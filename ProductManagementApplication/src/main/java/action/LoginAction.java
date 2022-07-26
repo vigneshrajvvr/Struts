@@ -16,8 +16,9 @@ public class LoginAction extends ActionSupport{
 		
 		String statusCode = "";
 		boolean isUserValid = LoginDAO.isValid(new LoginInfo(username, password));
-		ServletActionContext.getRequest().setAttribute("loggedinUser", username);
+		ServletActionContext.getRequest().getSession().setAttribute("loggedinUser", username);
 		if(isUserValid) {
+			System.out.println("Valid user");
 			statusCode = "success";
 		} else {
 			statusCode = "input";

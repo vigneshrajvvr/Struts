@@ -23,6 +23,7 @@ public class LoginInterceptor implements Interceptor {
 	public String intercept(ActionInvocation ai) throws Exception {
 		
 		Object user = ServletActionContext.getRequest().getAttribute("loggedinUser");
+		System.out.println("Login Interceptor.... " + ai.getAction().getClass().getName());
 		if(user == null) {
 			if(ai.getAction().getClass().getName().equals(LoginAction.class)) {
 				return ai.invoke();

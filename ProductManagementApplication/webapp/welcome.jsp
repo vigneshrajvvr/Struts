@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Welcome</title>
 <link rel="stylesheet" href="style.css">
+<sx:head/>
 </head>
 <body>
 
@@ -14,9 +16,12 @@
 	
 	<div align="center">
 		<h2>Welcome</h2>
-		<a href="addProduct.jsp">
-			<button class="actionBtn">Add New Product</button>
-		</a>
+		<s:form action="welcomeAction" class="filterPanel">
+			<s:textfield name="productName" label="Product Name" class="formTextField"/>
+			<s:textfield name="productCategory" label="Product Category" class="formTextField"/>
+			<sx:datetimepicker name="createdDate" label="Create Date" displayFormat="dd-MMM-yyyy"/> 
+			<s:submit value="Search Product" class="actionBtn"/>	
+		</s:form>
 	</div>
 	
 	<table width="750" class="productTable" align="center">
@@ -25,6 +30,7 @@
 				<th>Product ID</th>
 				<th>Product Name</th>
 				<th>Product Category</th>
+				<th>Created Date</th>
 				<th colspan="2">Actions</th>
 			</tr>
 		</thead>
@@ -45,6 +51,10 @@
 				
 				<td>
 					<s:property value="#product.productPrice"/>
+				</td>
+				
+				<td>
+					<s:property value="#product.createdDate"/>
 				</td>
 				
 				<td>

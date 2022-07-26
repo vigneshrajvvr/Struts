@@ -15,7 +15,7 @@ public class UpdateAction extends ActionSupport {
 	public String execute() {
 		String statusCode = "";
 		
-		Product product = new Product(productId, productName, productCategory, productPrice);
+		Product product = new Product(productId, productName, productCategory, productPrice, null);
 		
 		int recordUpdated = ProductManagementDAO.updateProduct(product);
 		

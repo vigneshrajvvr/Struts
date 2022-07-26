@@ -19,6 +19,7 @@
 			<s:textfield name="productName" label="Product Name" class="formTextField"/>
 			<s:textfield name="productCategory" label="Product Category" class="formTextField"/>
 			<s:textfield name="productPrice" label="Product Price" class="formTextField"/>
+			<s:textfield name="createdDate" label="Created Date" class='formTextField' readonly="true"/>
 			<s:submit value="Update Product" class="actionBtn"></s:submit>
 		</s:form>
 	</div>
